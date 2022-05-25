@@ -1,0 +1,55 @@
+var Menu = {
+  courses : {
+    appetizers : [],
+    mains : [],
+    desserts : []
+  },
+  addDishToCourse: (courseName, dishName, dishPrice) => {
+    let dish = {name: dishName, price: dishPrice}
+    return Menu['courses'][courseName].push(dish);
+  },
+  getRandomDishFromCourse:(courseName) => {
+    let dishes = Menu['courses'][courseName];
+    let randomIndex = Math.floor(Math.random()*(dishes.length));
+    //console.log(randomIndex)
+    //console.log(Menu['courses'][courseName][randomIndex]['name'])
+
+    let randomDish = Menu['courses'][courseName][randomIndex]['name']
+    
+    return randomDish;
+  },
+  generateRandomMeal: () => {
+    let randomAppetizer = Menu.getRandomDishFromCourse('appetizers');
+    let randomMain = Menu.getRandomDishFromCourse('mains');
+    let randomDessert = Menu.getRandomDishFromCourse('desserts');
+
+
+    const indexRandomAppetizer = Menu.courses.appetizers.map(e => e.name).indexOf(randomAppetizer);
+    const indexRandomMain = Menu.courses.mains.map(e => e.name).indexOf(randomMain);
+    const indexRandomDessert = Menu.courses.desserts.map(e => e.name).indexOf(randomDessert);
+
+    const randomAppetizerPrice = Menu['courses']['appetizers'][indexRandomAppetizer]['price'];
+    const randomMainPrice = Menu['courses']['mains'][indexRandomMain]['price'];
+    const randomDessertPrice = Menu['courses']['desserts'][indexRandomDessert]['price'];
+    
+    let priceTotal = randomAppetizerPrice + randomMainPrice + randomDessertPrice;
+
+    return `Appetizer: ${randomAppetizer}\nMain: ${randomMain}\nDessert:${randomDessert}\nTotalPrice: $${priceTotal}`;
+  }
+}
+
+Menu.addDishToCourse('appetizers','egg rolls',5);
+Menu.addDishToCourse('appetizers','salad',6);
+Menu.addDishToCourse('appetizers','edamame',3);
+
+Menu.addDishToCourse('mains','steak',15);
+Menu.addDishToCourse('mains','soup',12);
+Menu.addDishToCourse('mains','noodles',13);
+
+Menu.addDishToCourse('desserts','cake',10);
+Menu.addDishToCourse('desserts','ice cream',8);
+Menu.addDishToCourse('desserts','boba',6);
+
+let meal = Menu.generateRandomMeal();
+
+console.log(meal);
