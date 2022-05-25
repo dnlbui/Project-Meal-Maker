@@ -24,7 +24,8 @@ var Menu = {
     let randomDessert = Menu.getRandomDishFromCourse('desserts');
 
 
-    const indexRandomAppetizer = Menu.courses.appetizers.map(e => e.name).indexOf(randomAppetizer);
+    //const indexRandomAppetizer = Menu.courses.appetizers.map(e => e.name).indexOf(randomAppetizer);
+    const indexRandomAppetizer = Menu.courses.appetizers.findIndex(item => item.name === randomAppetizer);
     const indexRandomMain = Menu.courses.mains.map(e => e.name).indexOf(randomMain);
     const indexRandomDessert = Menu.courses.desserts.map(e => e.name).indexOf(randomDessert);
 
